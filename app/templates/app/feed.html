@@ -1,0 +1,10 @@
+{% block body %}
+<form method="GET" role="form">
+    
+    {{ form }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {% if answer != None %}
+       <p>{{ answer }}</p>
+       {% endif %}
+</form>
+{% endblock body %}
