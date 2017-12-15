@@ -4,5 +4,5 @@ from app import views
 app_name = 'app'
 
 urlpatterns = [
-    path('home/', views.home, name="home"),
+    path('', views.imageInput, name="home"),
 ]
