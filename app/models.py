@@ -9,4 +9,4 @@ class ImagePostModel(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def image_url(self):
-        return self.image.url(len('app/static/'))
+        return self.image.name[len('app/static/'):]
