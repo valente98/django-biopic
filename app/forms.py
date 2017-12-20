@@ -1,6 +1,9 @@
 from django import forms
 from PIL import Image
+from app.models import ImagePostModel
 
 
-class OpenImageFile(forms.Form):
-    Filepath = Image.open('../app/static/app/photos/ACE17FIFA.jpg')
+class ImageUploadForm(forms.ModelForm):
+    class Meta:
+        model = ImagePostModel
+        fields = ('caption', 'image')
