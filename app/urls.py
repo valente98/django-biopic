@@ -4,5 +4,6 @@ from app import views
 app_name = 'app'
 
 urlpatterns = [
-    path('', views.imageInput, name="home"),
+    path('upload/', views.UploadImage.as_view(), name="upload"),
+    path('feed/', views.UploadImage.as_view(), name="feed")
 ]
