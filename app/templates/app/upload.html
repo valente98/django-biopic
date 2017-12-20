@@ -1,9 +1,10 @@
 {% block body %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
     <button type="submit">Upload</button>
-  </form>
+</form>
 
-  <p><a href="{% url 'app:feed' %}">Return to home</a></p>
+<p>
+    <a href="{% url 'app:base' %}">Return to home</a>
+</p>
 {% endblock body %}
