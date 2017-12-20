@@ -18,8 +18,10 @@ class UploadImage(View):
         if form.is_valid():
             caption = form.cleaned_data['caption']
             image = form.cleaned_data['image']
-            ImagePostModel(caption=caption, image=image).save()
-            return redirect('app:""')
+            uploaded_by = form.cleaned_data['uploaded_by']
+            ImagePostModel(
+                caption=caption, image=image, uploaded_by=uploaded_by).save()
+            return redirect("app:base")
         else:
             return render(request, 'app/upload.html', {'form': form})
 
