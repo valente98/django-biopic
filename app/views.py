@@ -10,7 +10,10 @@ from app.forms import ImageUploadForm
 class UploadImage(View):
     def get(self, request):
         form = ImageUploadForm()
-        return render(request, 'app/upload.html', {'form': form})
+        return render(request, 'app/feed.html', {
+            'Image': form.Meta.model.image,
+            'caption': form.Meta.model.caption
+        })
 
     def post(self, request):
         form = ImageUploadForm()
