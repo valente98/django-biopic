@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,22 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="/app/static/css/style.css">
 </head>
+
 <body>
     <h1>Biopic</h1>
-    {% block body %}
-    {% csrf_token %}
-    {% load static %}
-    {% if objects %} {% for obj in objects %}
-        <div>
-            <img src="{% static obj.image_url %}" width="300" height="300"/>
-        </div>
-        <div>{{ obj.caption }}</div> 
-        {% endfor %}{% endif %}
-    {% endblock body %}
+    {% block body %} {% csrf_token %} {% load static %} {% if objects %} {% for obj in objects %}
+    <div>{{ obj.uploaded_by }}</div>
+    <div>
+        <img src="{% static obj.image_url %}" width="300" height="300" />
+    </div>
+    <div>
+        <div>{{ obj.uploaded_at }}</div>
+        <div>{{ obj.caption }}</div>
+    </div>
+    {% endfor %}{% endif %} {% endblock body %}
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/js/bootstrap.min.js"></script>
     <script src="/app/static/javascript/index.js"></script>
 </body>
+
 </html>
