@@ -1,8 +1,0 @@
-{% block body %}
-<form method="get" enctype="multipart/form-data">
-{% csrf_token %}
-<img src = "{{ Image }}" width="300" height="300"/>
-{{ caption }}
-
-
-{% endblock body %}
