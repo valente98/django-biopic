@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from PIL import Image
-from app import forms
+from app import models
 
 # Create your views here.
 
 
 def imageInput(request):
-    imageInputForm = forms.OpenImageFile(request.GET)
+    imageInputModel = models.OpenImageFile(request.GET)
     return render(request, 'app/feed.html', {
         'form': imageInputModel,
     })
