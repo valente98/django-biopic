@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Django View Practice</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/app/static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <h1>Biopic</h1>
-    {% block body %} {% csrf_token %} {% load static %} {% if objects %} {% for obj in objects %}
-    <div>{{ obj.uploaded_by }}</div>
-    <div>
-        <img src="{% static obj.image_url %}" width="300" height="300" />
-    </div>
-    <div>
-        <div>{{ obj.uploaded_at }}</div>
-        <div>{{ obj.caption }}</div>
-    </div>
+    <center>
+        <div id=header>
+            <h1>Biopic</h1>
+            <hr>
+        </div>
+    </center>
+    {% block body %} {% if objects %} {% for obj in objects %}
+    <center>
+        <div id="post" class="col-lg-4">
+            <div>{{ obj.uploaded_by }}
+                <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button id="delete">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+            <div>
+                <img src="{% static obj.image_url %}" width="300" height="300" />
+            </div>
+            <div>
+                <div>{{ obj.uploaded_at }}</div>
+                <div>{{ obj.caption }}</div>
+            </div>
+        </div>
+    </center>
     {% endfor %}{% endif %} {% endblock body %}
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/app/static/javascript/index.js"></script>
 </body>
 
 </html>
