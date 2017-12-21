@@ -30,3 +30,9 @@ class ShowImages(View):
     def get(self, request):
         objects = ImagePostModel.objects.all()
         return render(request, 'app/base.html', {'objects': objects})
+
+
+class DeleteImage(View):
+    def post(self, request, img_id):
+        ImagePostModel.objects.get(id=img_id).delete()
+        return redirect('app:base')
