@@ -16,11 +16,12 @@
 <body>
     <center>
         <div id=header>
-            <h1>Biopic</h1>
+            <h1>
+                <i class="fa fa-picture-o" aria-hidden="true"></i> Biopic </h1>
         </div>
         <form action="{% url 'app:upload' %}">
             <button>
-                Upload Image
+                <i class="fa fa-upload" aria-hidden="true"></i> Upload Image
             </button>
         </form>
     </center>
@@ -46,7 +47,7 @@
                 <form action="{% url 'app:filter' obj.id %}" method="get">
                     {% csrf_token %}
                     <button>
-                        filter
+                        <i class="fa fa-filter" aria-hidden="true"></i> filter
                     </button>
                 </form>
             </div>
