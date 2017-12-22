@@ -17,8 +17,12 @@
     <center>
         <div id=header>
             <h1>Biopic</h1>
-            <hr>
         </div>
+        <form action="{% url 'app:upload' %}">
+            <button>
+                Upload Image
+            </button>
+        </form>
     </center>
     {% block body %} {% if objects %} {% for obj in objects %}
     <center>
@@ -37,6 +41,13 @@
             <div>
                 <div>{{ obj.uploaded_at }}</div>
                 <div>{{ obj.caption }}</div>
+            </div>
+            <div>
+                <form action="{% url 'app:filter' %}" method="get">
+                    <button>
+                        filter
+                    </button>
+                </form>
             </div>
         </div>
     </center>
