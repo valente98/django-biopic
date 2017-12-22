@@ -8,5 +8,7 @@ class ImagePostModel(models.Model):
     uploaded_by = models.CharField(max_length=20, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+    # profile_pic = models.ImageField(upload_to="app/static/app/photos/")
+
     def image_url(self):
         return self.image.name[len('app/static/'):]
