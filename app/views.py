@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from PIL import Image
+from PIL import Image, ImageFilter
 from app import models, forms
 from django.views import View
-from app.forms import ImageUploadForm
+from app.forms import ImageUploadForm, Filters
 from app.models import ImagePostModel
 
 # Create your views here.
@@ -36,3 +36,20 @@ class DeleteImage(View):
     def post(self, request, img_id):
         ImagePostModel.objects.get(id=img_id).delete()
         return redirect('app:base')
+
+
+class FiltersChoice(View):
+    def get(self, request):
+        form = Filters()
+        return render(request, 'app/filter.html', {'form': form})
+
+    def POST(self, request, img_id):
+        form = Filters(request.POST)
+        if form.is_valid():
+            filter_choice = Filters.filters()
+            new_img = ImagePostModel.objects.get(
+                id=img_id).filter(filter_choice)
+            ImagePostModel(image=new_img)
+            return redirect("app:base")
+        else:
+            return render(request, 'app/filter.html', {'form', form})
