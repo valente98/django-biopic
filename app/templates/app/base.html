@@ -24,7 +24,7 @@
             </button>
         </form>
     </center>
-    {% block body %} {% if objects %} {% for obj in objects %}
+    {% if objects %} {% for obj in objects %} {% block body %}
     <center>
         <div id="post" class="col-lg-4">
             <div>{{ obj.uploaded_by }}
@@ -43,7 +43,8 @@
                 <div>{{ obj.caption }}</div>
             </div>
             <div>
-                <form action="{% url 'app:filter' %}" method="get">
+                <form action="{% url 'app:filter' obj.id %}" method="get">
+                    {% csrf_token %}
                     <button>
                         filter
                     </button>
@@ -51,7 +52,7 @@
             </div>
         </div>
     </center>
-    {% endfor %}{% endif %} {% endblock body %}
+    {% endblock body %} {% endfor %}{% endif %}
 </body>
 
 </html>
