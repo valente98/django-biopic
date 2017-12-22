@@ -25,8 +25,7 @@ class Filters(forms.Form):
     Filter_Choice = forms.ChoiceField(choices=(choice.items()))
 
     def filters(self):
-        filter_choice = self.cleaned_data['Filter_choice']
-        filters = {
+        return {
             'BLUR': ImageFilter.BLUR,
             'CONTOUR': ImageFilter.CONTOUR,
             'DETAIL': ImageFilter.DETAIL,
@@ -37,5 +36,4 @@ class Filters(forms.Form):
             'SMOOTH': ImageFilter.SMOOTH,
             'SMOOTH_MORE': ImageFilter.SMOOTH_MORE,
             'SHARPEN': ImageFilter.SHARPEN
-        }
-        return filters[filter_choice]
+        }.get(self.cleaned_data['Filter_Choice'], None)
