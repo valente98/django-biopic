@@ -39,17 +39,18 @@ class DeleteImage(View):
 
 
 class FiltersChoice(View):
-    def get(self, request):
+    def get(self, request, img_id):
         form = Filters()
         return render(request, 'app/filter.html', {'form': form})
 
-    def POST(self, request, img_id):
+    def post(self, request, img_id):
         form = Filters(request.POST)
+        path = 'app/static/' + ImagePostModel.objects.get(
+            id=img_id).image_url()
+        image = Image.open(path)
         if form.is_valid():
-            filter_choice = Filters.filters()
-            new_img = ImagePostModel.objects.get(
-                id=img_id).filter(filter_choice)
-            ImagePostModel(image=new_img)
+            filter_choice = form.filters()
+            image.convert('RGB').filter(filter_choice).save(path)
             return redirect("app:base")
         else:
             return render(request, 'app/filter.html', {'form', form})
