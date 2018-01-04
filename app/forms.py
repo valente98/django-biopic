@@ -37,3 +37,12 @@ class Filters(forms.Form):
             'SMOOTH_MORE': ImageFilter.SMOOTH_MORE,
             'SHARPEN': ImageFilter.SHARPEN
         }.get(self.cleaned_data['Filter_Choice'], None)
+
+
+# class Likes(forms.):
+# class LoginForm(forms.Form):
+
+# class SignupForm(forms.Form):
+#     Username = forms.CharField()
+#     Email = forms.CharField()
+#     Password = forms.CharField()
