@@ -7,8 +7,12 @@ class ImagePostModel(models.Model):
     image = models.ImageField(upload_to="app/static/app/photos/")
     uploaded_by = models.CharField(max_length=20, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    # profile_pic = models.ImageField(upload_to="app/static/app/photos/")
+    likes = models.IntegerField(default=0)
 
     def image_url(self):
         return self.image.name[len('app/static/'):]
+
+
+class Comments(models.Model):
+    Comment = models.CharField(max_length=180)
+    post = models.ForeignKey(ImagePostModel, on_delete=models.CASCADE)
