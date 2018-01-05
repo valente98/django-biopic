@@ -4,11 +4,9 @@
 body {
     background-color: #e6ecf0;
 }
-#post {
+.thumbnail {
     margin-top: 20px;
     margin-left: 30px;
     border: 1px solid #ccc;
     background-color: gainsboro;
-    width: 30em;
-    height: 30em;
 }
