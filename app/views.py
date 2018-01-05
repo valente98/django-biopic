@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from PIL import Image, ImageFilter
 from app import models, forms
 from django.views import View
-from app.forms import ImageUploadForm, Filters
+from app.forms import ImageUploadForm, Filters, CommentForm
 from app.models import ImagePostModel
 
 # Create your views here.
@@ -29,7 +29,9 @@ class UploadImage(View):
 class ShowImages(View):
     def get(self, request):
         objects = ImagePostModel.objects.all()
-        return render(request, 'app/base.html', {'objects': objects})
+        return render(request, 'app/base.html',
+                      {'objects': objects,
+                       'c_form': CommentForm()})
 
 
 class DeleteImage(View):
@@ -66,4 +68,10 @@ class Likes(View):
 
 class Comments(View):
     def post(self, request, img_id):
-        img = ImagePostModel.objects.get(id=img_id)
+        document = ImagePostModel.objects.get(id=img_id)
+        form = forms.CommentForm(document, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:base')
+        else:
+            return redirect('app:base')
