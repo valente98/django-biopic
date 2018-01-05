@@ -56,10 +56,24 @@
                         <i class="fa fa-filter" aria-hidden="true"></i> filter
                     </button>
                 </form>
+                {% if obj.comments_set.all %}
+                <ul>
+                    {% for comment in obj.comments_set.all %}
+                    <li>
+                        {{ comment.comment }} at {{ comment.time }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'app:comment' obj.id %}" method="post">
+                    {% csrf_token %} {{ c_form }}
+                    <button type="submit">Comment</button>
+                </form>
             </div>
         </div>
     </center>
     {% endblock body %} {% endfor %}{% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 
 </html>
