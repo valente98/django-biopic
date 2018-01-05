@@ -39,7 +39,18 @@ class Filters(forms.Form):
         }.get(self.cleaned_data['Filter_Choice'], None)
 
 
-# class Likes(forms.):
+class CommentForm(forms.Form):
+    comment = forms.CharField(max_length=50)
+
+    def __init__(self, post=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.post = post
+
+    def save(self):
+        return self.post.comments_set.create(
+            comment=self.cleaned_data['comment'])
+
+
 # class LoginForm(forms.Form):
 
 # class SignupForm(forms.Form):
