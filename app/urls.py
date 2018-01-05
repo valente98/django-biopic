@@ -12,4 +12,5 @@ urlpatterns = [
     path('filter/<img_id>', views.FiltersChoice.as_view(), name="filter"),
     path('choice/<img_id>', views.FiltersChoice.as_view(), name="choice"),
     path('likes/<img_id>', views.Likes.as_view(), name="likes"),
+    path('comment/<img_id>', views.Comments.as_view(), name="comment"),
 ]
