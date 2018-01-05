@@ -14,5 +14,6 @@ class ImagePostModel(models.Model):
 
 
 class Comments(models.Model):
-    Comment = models.CharField(max_length=180)
+    comment = models.CharField(max_length=180)
+    time = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(ImagePostModel, on_delete=models.CASCADE)
