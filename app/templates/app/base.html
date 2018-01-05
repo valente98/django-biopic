@@ -27,7 +27,7 @@
     </center>
     {% if objects %} {% for obj in objects %} {% block body %}
     <center>
-        <div id="post" class="col-lg-4">
+        <div class="col-lg-3 thumbnail">
             <div>{{ obj.uploaded_by }}
                 <form action="{% url 'app:delete' obj.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -44,6 +44,12 @@
                 <div>{{ obj.caption }}</div>
             </div>
             <div>
+                <form action="{% url 'app:likes' obj.id %}" method="post">
+                    {% csrf_token %}
+                    <button>
+                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ obj.likes }}
+                    </button>
+                </form>
                 <form action="{% url 'app:filter' obj.id %}" method="get">
                     {% csrf_token %}
                     <button>
