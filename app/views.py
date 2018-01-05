@@ -54,3 +54,16 @@ class FiltersChoice(View):
             return redirect("app:base")
         else:
             return render(request, 'app/filter.html', {'form', form})
+
+
+class Likes(View):
+    def post(self, request, img_id):
+        count = models.ImagePostModel.objects.get(id=img_id)
+        count.likes += 1
+        count.save()
+        return redirect('app:base')
+
+
+class Comments(View):
+    def post(self, request, img_id):
+        img = ImagePostModel.objects.get(id=img_id)
