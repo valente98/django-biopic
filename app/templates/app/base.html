@@ -24,6 +24,11 @@
                 <i class="fa fa-upload" aria-hidden="true"></i> Upload Image
             </button>
         </form>
+        <form action="{% url 'app:most_like' %}">
+            <button>
+                <i class="fa fa-heart" aria-hidden="true"></i> Most Likes
+            </button>
+        </form>
     </center>
     {% if objects %} {% for obj in objects %} {% block body %}
     <center>
@@ -47,7 +52,7 @@
                 <form action="{% url 'app:likes' obj.id %}" method="post">
                     {% csrf_token %}
                     <button>
-                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ obj.likes }}
+                        <i class="fa fa-heart" aria-hidden="true"></i> {{ obj.likes }}
                     </button>
                 </form>
                 <form action="{% url 'app:filter' obj.id %}" method="get">
@@ -60,14 +65,14 @@
                 <ul>
                     {% for comment in obj.comments_set.all %}
                     <li>
-                        {{ comment.comment }} at {{ comment.time }}
+                        {{ comment.comment }} - {{ comment.time }}
                     </li>
                     {% endfor %}
                 </ul>
                 {% endif %}
                 <form action="{% url 'app:comment' obj.id %}" method="post">
-                    {% csrf_token %} {{ c_form }}
-                    <button type="submit">Comment</button>
+                    {% csrf_token %}{{ c_form }}
+                    <button type="submit">Submit</button>
                 </form>
             </div>
         </div>
