@@ -51,9 +51,6 @@ class CommentForm(forms.Form):
             comment=self.cleaned_data['comment'])
 
 
-# class MostLikesForm(forms.Form):
-
-#     def get(self, request, img_id)
 # class LoginForm(forms.Form):
 
 # class SignupForm(forms.Form):
