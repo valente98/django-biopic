@@ -75,3 +75,9 @@ class Comments(View):
             return redirect('app:base')
         else:
             return redirect('app:base')
+
+
+class MostLikes(View):
+    def get(self, request):
+        objects = ImagePostModel.objects.all().order_by('-likes')[:4]
+        return render(request, 'app/most_like.html', {'objects': objects})
