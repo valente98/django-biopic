@@ -24,11 +24,19 @@
                 <i class="fa fa-upload" aria-hidden="true"></i> Upload Image
             </button>
         </form>
+        <br>
         <form action="{% url 'app:most_like' %}">
             <button>
                 <i class="fa fa-heart" aria-hidden="true"></i> Most Likes
             </button>
         </form>
+        <br>
+        <form action="{% url 'app:most_comments' %}">
+            <button>
+                <i class="fa fa-comments" aria-hidden="true"></i> Most Comments
+            </button>
+        </form>
+        <br>
     </center>
     {% if objects %} {% for obj in objects %} {% block body %}
     <center>
