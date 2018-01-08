@@ -13,5 +13,6 @@ urlpatterns = [
     path('choice/<img_id>', views.FiltersChoice.as_view(), name="choice"),
     path('likes/<img_id>', views.Likes.as_view(), name="likes"),
     path('comment/<img_id>', views.Comments.as_view(), name="comment"),
-    path('most_like/', views.MostLikes.as_view(), name="most_like")
+    path('most_like/', views.MostLikes.as_view(), name="most_like"),
+    path('most_comments/', views.Mostcomments.as_view(), name="most_comments"),
 ]
