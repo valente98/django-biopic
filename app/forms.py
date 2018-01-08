@@ -49,11 +49,3 @@ class CommentForm(forms.Form):
     def save(self):
         return self.post.comments_set.create(
             comment=self.cleaned_data['comment'])
-
-
-# class LoginForm(forms.Form):
-
-# class SignupForm(forms.Form):
-#     Username = forms.CharField()
-#     Email = forms.CharField()
-#     Password = forms.CharField()
