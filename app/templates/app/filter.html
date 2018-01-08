@@ -11,13 +11,15 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 {% block body %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">
-        <i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
-</form>
+<center>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">
+            <i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+    </form>
 
-<p>
-    <a href="{% url 'app:base' %}">Return to home</a>
-</p>
+    <p>
+        <a href="{% url 'app:base' %}">Return to home</a>
+    </p>
+</center>
 {% endblock body %}
