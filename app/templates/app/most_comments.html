@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Biopic Login</title>
+</head>
+
+<body>
+    <center>
+        <div id=header>
+            <h1>
+                <i class="fa fa-picture-o" aria-hidden="true"></i> Biopic Most Comments</h1>
+        </div>
+        <br>
+        <form action="{% url 'app:base' %}">
+            <button>
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </button>
+        </form>
+        <br>
+    </center>
+    {% if objects %} {% for obj in objects %} {% block body %}
+    <center>
+        <div class="col-lg-3 thumbnail">
+            <div>
+                {{ obj.uploaded_by }}
+            </div>
+            <div>
+                <img src="{% static obj.image_url %}" width="300" height="300" />
+            </div>
+            <div>
+                <div>{{ obj.uploaded_at }}</div>
+                <div>{{ obj.caption }}</div>
+            </div>
+            <div>
+                <form action="{% url 'app:likes' obj.id %}" method="post">
+                    {% csrf_token %}
+                    <button>
+                        <i class="fa fa-heart" aria-hidden="true"></i> {{ obj.likes }}
+                    </button>
+                </form>
+                {% if obj.comments_set.all %}
+                <ul>
+                    {% for comment in obj.comments_set.all %}
+                    <li>
+                        {{ comment.comment }} - {{ comment.time }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="{% url 'app:comment' obj.id %}" method="post">
+                    {% csrf_token %}{{ c_form }}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </center>
+    {% endblock %} {% endfor %} {% endif %}
+</body>
+
+</html>
