@@ -110,4 +110,7 @@ class Signup(View):
                 user = authenticate(
                     username=user.username, password=raw_password)
                 login(request, user)
-        return redirect('app:base')
+                return redirect('app:base')
+        else:
+            form = SignUpForm()
+        return render(request, 'app/signup.html', {'form': form})
