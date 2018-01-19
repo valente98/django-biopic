@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from PIL import Image, ImageFilter
-from app import models, forms
 from django.views import View
-from app.forms import ImageUploadForm, Filters, CommentForm
+from app.forms import *
 from app.models import ImagePostModel
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -60,7 +61,7 @@ class FiltersChoice(View):
 
 class Likes(View):
     def post(self, request, img_id):
-        count = models.ImagePostModel.objects.get(id=img_id)
+        count = ImagePostModel.objects.get(id=img_id)
         count.likes += 1
         count.save()
         return redirect('app:base')
@@ -69,7 +70,7 @@ class Likes(View):
 class Comments(View):
     def post(self, request, img_id):
         document = ImagePostModel.objects.get(id=img_id)
-        form = forms.CommentForm(document, request.POST)
+        form = CommentForm(document, request.POST)
         if form.is_valid():
             form.save()
             return redirect('app:base')
@@ -89,3 +90,24 @@ class Mostcomments(View):
         return render(request, 'app/most_comments.html',
                       {'objects': objects,
                        'c_form': CommentForm()})
+
+
+class Signup(View):
+    def get(self, request):
+        form = SignUpForm()
+        return render(request, 'app/signup.html', {'form': form})
+
+    def post(self, request):
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                user.refresh_from_db(
+                )  # load the profile instance created by the signal
+                user.profile.birth_date = form.cleaned_data.get('birth_date')
+                user.save()
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(
+                    username=user.username, password=raw_password)
+                login(request, user)
+        return redirect('app:base')
