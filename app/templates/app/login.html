@@ -18,9 +18,12 @@
             <h1>
                 <i class="fa fa-picture-o" aria-hidden="true"></i> Biopic </h1>
         </div>
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
     </center>
-
-
 </body>
 
 </html>
