@@ -1,6 +1,8 @@
 from django import forms
 from PIL import Image, ImageFilter
 from app.models import ImagePostModel
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 class ImageUploadForm(forms.ModelForm):
@@ -49,3 +51,11 @@ class CommentForm(forms.Form):
     def save(self):
         return self.post.comments_set.create(
             comment=self.cleaned_data['comment'])
+
+
+class SignUpForm(UserCreationForm):
+    birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+
+    class Meta:
+        model = User
+        fields = ('username', 'birth_date', 'password1', 'password2', )
